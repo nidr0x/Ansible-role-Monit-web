@@ -1,0 +1,15 @@
+# file: monit/meta/main.yml
+
+galaxy_info:
+  author: nidr0x
+  description: "Installs monit monitoring and management tool to a server with common web services."
+  min_ansible_version: 1.4
+  license: MIT
+  platforms:
+  - name: Debian
+    versions:
+    - all
+  categories:
+  - system
+  - monitoring
+
