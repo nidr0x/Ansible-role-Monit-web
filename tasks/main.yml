@@ -1,18 +1,18 @@
 # file: monit/tasks/main.yml
 
-- name: Monit | Make sure monit is installed
+- name: Checking if monit is installed
   apt:
     pkg: monit
     state: present
 
-- name: Monit | Update the monit configuration (/etc/monit/monitrc)
+- name: Update the monit configuration
   template:
     src: "etc_monit_monitrc.j2"
     dest: "/etc/monit/monitrc"
   notify:
     - restart monit
 
-- name: Monit | Copy monit service files
+- name: Copy monit service files
   template:
     src: "etc_monit_conf.d_{{item}}.j2"
     dest: "/etc/monit/conf.d/{{item}}"
@@ -21,13 +21,13 @@
   notify:
     - reload monit
 
-- name: Monit | Determine queued messages
+- name: Looking for queued messages
   command: "ls -1 {{monit_eventqueue_directory}}/"
   register: monit_queued_messages
   when: not monit_email_enable or not monit_eventqueue_enable
   changed_when: False
 
-- name: Monit | Remove queued messages
+- name: Remove queued messages
   file:
     path: "{{monit_eventqueue_directory}}/{{item}}"
     state: absent

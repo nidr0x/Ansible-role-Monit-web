@@ -2,6 +2,7 @@
 
 monit_email_enable: yes
 monit_notify_email: ""
+
 # Monitoring services
 monit_enabled_services:
     - sshd
